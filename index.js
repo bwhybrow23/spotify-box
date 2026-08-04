@@ -43,7 +43,8 @@ async function updateTopTracks(json) {
     throw error
   }
 
-  const tracks = json.items.map(item => ({
+  const items = Array.isArray(json?.items) ? json.items : []
+  const tracks = items.map(item => ({
     name: item.name,
     artist: item.artists.map(artist => artist.name.trim()).join(' & '),
   }))
